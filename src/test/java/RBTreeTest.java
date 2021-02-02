@@ -75,6 +75,10 @@ class RBTreeTest {
             tree.put(data);
         }
         checkRBTree(tree.root);
+        for (int data: datas) {
+            tree.remove(data);
+            checkRBTree(tree.root);
+        }
     }
 
     /**
