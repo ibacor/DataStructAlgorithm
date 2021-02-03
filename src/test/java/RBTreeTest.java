@@ -26,6 +26,7 @@ class RBTreeTest {
         RBTree tree = new RBTree();
         for (int data: datas) {
             tree.put(data);
+            assertTrue(checkRBTree(tree.root));
         }
         LinkedList<Integer> preList = new LinkedList<>();
         preOrder(tree.root, preList);
@@ -74,10 +75,10 @@ class RBTreeTest {
         for (int data: datas) {
             tree.put(data);
         }
-        checkRBTree(tree.root);
+        assertTrue(checkRBTree(tree.root));
         for (int data: datas) {
             tree.remove(data);
-            checkRBTree(tree.root);
+            assertTrue(checkRBTree(tree.root));
         }
     }
 
@@ -122,12 +123,12 @@ class RBTreeTest {
     }
 
     private boolean checkBlackCount(RBTree.RBTreeNode p, int count, int num) {
-        if (RBTree.colorOf(p) == RBTree.BLACK) {
-            num++;
-        }
-
         if (p == null) {
             return num == count;
+        }
+
+        if (p.color == RBTree.BLACK) {
+            num++;
         }
         return checkBlackCount(p.left, count, num) && checkBlackCount(p.right, count, num);
     }
